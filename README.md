@@ -51,6 +51,25 @@ node@f2267f64de35:/src/nginx$
 Since the directory is shared into the container with read-write permissions, any changes
 made by claude inside the container will be saved to your host machine.
 
+## Faster access
+
+A trick for faster invocation is to symlink `claude.sh` into your `~/bin` directory:
+
+```
+(mkdir -p ~/bin && cd ~/bin && ln -sf ~/src/claudecontainer/claude.sh .)
+```
+
+Make sure `~/bin` is path of your `$PATH`.  If not, add this to your `~/.bash_profile` or `~/.bashrc`:
+
+```
+export PATH="~/bin:$PATH"
+```
+
+Not you can run `claude.sh` from any directory:
+
+```
+claude.sh ~/src/nginx
+```
 
 ## Where does this repo get claude code from?
 

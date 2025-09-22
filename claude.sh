@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# make sure this works even if it was symlinked
+# for example, ~/bin/claude.sh -> ~/src/claudecode/claude.sh
+cd "$(dirname $(readlink $0))"
+
 function usage
 {
     echo "usage: $0 <source_dir>"
