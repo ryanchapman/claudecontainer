@@ -2,12 +2,17 @@ services:
   claude:
     build:
       context: ./claudecode
-    container_name: claudecode
+    container_name: ${CONTAINER_NAME:-pclaudecode}
+    hostname: ${CONTAINER_NAME:-pclaudecode}
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
     volumes:
       - ${SRC_FULLPATH:-/tmp}:/src:rw
       - ${HOME}/.claude:/home/node/.claude:rw
       - ${HOME}/.claude.json:/home/node/.claude.json:rw
       - ${HOME}/.claude.json.backup:/home/node/.claude.json.backup:rw
-    working_dir: /src/${SRC_BASEDIR:-}
+    working_dir: /src
     restart: unless-stopped
     command: sleep infinity
